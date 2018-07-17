@@ -1,0 +1,71 @@
+﻿@model IEnumerable<HotelEntity.Class.Rooms>
+
+@{
+    ViewBag.Title = "AvailableRoom";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<div class="panel panel-primary" style="margin-top:70px;">
+    <div class="panel-heading">AvailableRoom</div>
+
+    @if (Session["UserID"] != null)
+    {
+
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+              <th>  </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.Status == 1)
+                {
+                    <tr>
+                        <td class="success">
+                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                        </td>
+
+                        <td class="danger">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+
+                        <td class="active">
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+
+                        <td class="success">
+                            @Html.DisplayFor(modelItem => item.Capacity)
+                        </td>
+                        <td class="danger">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td class="alert-warning">
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                       
+
+                        <td></td>
+                    </tr>}
+            }
+
+        </table>
+    }
+</div>

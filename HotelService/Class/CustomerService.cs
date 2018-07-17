@@ -13,5 +13,17 @@ namespace HotelService.Class
     {
         CustomerRepository crepo = new CustomerRepository();
 
+       
+
+        public int UpdateStatus(Customers customer)
+        {
+           
+            return this.crepo.UpdateStatus(customer);
+        }
+
+
+
+
+
     }
 }

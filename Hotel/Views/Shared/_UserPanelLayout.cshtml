@@ -105,8 +105,8 @@
                             </div>
                         </li>
                         <li>
-                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i> Home</a>
-                        </li>
+                            @Html.ActionLink(" Home", "UserHomepage", "User", null, new { @class = "glyphicon glyphicon-home" })  
+                          </li>
                         <li style="margin-top:10px;">
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i>Customers<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

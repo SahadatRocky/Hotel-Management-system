@@ -1,0 +1,42 @@
+﻿@model HotelEntity.Class.User
+
+@{
+    ViewBag.Title = "EditUserDetails";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<div class="panel panel-primary" style="margin-top:70px;">
+    <div class="panel-heading">Edit  User Details</div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+
+
+            <div class="form-group" style="margin-top:50px;">
+                @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control btn-xs" name="UserType">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+
+                 </select>   
+                   </div>
+            </div>
+
+            <div class="form-group" style="margin-top:50px;">
+                <div class="form-actions no-color col-sm-offset-3">
+                    <input type="submit" value="EDIT USER INFORMATION" class="btn btn-primary btn-sm btn-block login-button" /> 
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>

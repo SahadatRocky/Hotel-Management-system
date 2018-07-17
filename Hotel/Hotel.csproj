@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Admin\Search.js" />
+    <Content Include="Scripts\API_scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\API_scripts\RoomList.js" />
     <Content Include="Scripts\Frontend\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\Frontend\fonts\fontawesome-webfont.ttf" />
     <Content Include="Scripts\Frontend\fonts\fontawesome-webfont.woff" />
@@ -126,6 +131,7 @@
     <Content Include="Scripts\Frontend\images\ga5.jpg" />
     <Content Include="Scripts\Frontend\images\ga6.jpg" />
     <Content Include="Scripts\Frontend\images\ga7.jpg" />
+    <Content Include="Scripts\Frontend\images\hotel-icon-blue.jpg" />
     <Content Include="Scripts\Frontend\images\img-sprite.png" />
     <Content Include="Scripts\Frontend\images\p.jpg" />
     <Content Include="Scripts\Frontend\images\p1.jpg" />
@@ -166,10 +172,15 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\PDF\jquery-2.1.3.js" />
+    <Content Include="Scripts\PDF\jspdf.js" />
+    <Content Include="Scripts\PDF\pdfFromHTML.js" />
     <Content Include="Scripts\UserPanel\css\bootstrap-social.css" />
     <Content Include="Scripts\UserPanel\css\bootstrap-theme.min.css" />
     <Content Include="Scripts\UserPanel\css\bootstrap.min.css" />
@@ -188,17 +199,22 @@
     <Content Include="Scripts\UserPanel\js\morris.min.js" />
     <Content Include="Scripts\UserPanel\js\raphael.min.js" />
     <Content Include="Scripts\UserPanel\js\startmin.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Injector.cs" />
     <Compile Include="App_Start\InjectorControllerFactory.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +246,23 @@
     <Content Include="Views\User\UserHomepage.cshtml" />
     <Content Include="Views\Customer\addCustomer.cshtml" />
     <Content Include="Views\Customer\RegisterCustomer.cshtml" />
+    <Content Include="Views\Admin\AdminPage.cshtml" />
+    <Content Include="Views\Shared\_AminPanelLayout.cshtml" />
+    <Content Include="Views\Room\AddRoom.cshtml" />
+    <Content Include="Views\Room\ManageRoom.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\Details.cshtml" />
+    <Content Include="Views\Room\Delete.cshtml" />
+    <Content Include="Views\Room\AvailableRoom.cshtml" />
+    <Content Include="Views\User\UserDetails.cshtml" />
+    <Content Include="Views\User\DeleteUser.cshtml" />
+    <Content Include="Views\User\EditUserDetails.cshtml" />
+    <Content Include="Views\Customer\CustomerBookingRoomsDetails.cshtml" />
+    <Content Include="Views\Customer\ShowRoomDetails.cshtml" />
+    <Content Include="Views\Customer\CustomerBookingRoom.cshtml" />
+    <Content Include="Views\Customer\BillGenerate.cshtml" />
+    <Content Include="Views\Admin\BillGenerate.cshtml" />
+    <Content Include="Views\User\ShowRoomDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -239,7 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Image\" />
     <Folder Include="Scripts\UserPanel\css\dataTables\" />
     <Folder Include="Scripts\UserPanel\js\dataTables\" />
     <Folder Include="Scripts\UserPanel\js\flot\" />
@@ -254,11 +287,15 @@
       <Name>HotelService</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    
+
+</head>
+
+<body>
+
+    <h2>Create JSON string from a JavaScript object.</h2>
+    Name:<br />
+    <input type="text" id="nm" value=""/><br />
+    Email:<br />
+    <input type="text" id="eml" value="" /><br />
+    Phone:<br />
+    <input type="text" id="phn" value="" /><br />
+    Status:<br />
+    <input type="text" id="sts" value="" /><br/>
+    Message :<br />
+    <input type="text" id="msg" value="" /><br/>
+    <br />
+    <input id="btnadd" type="button" value="Add">
+    <p id="demo"></p>
+
+    <script type="text/javascript">
+
+        $("#btnadd").click(function () {
+
+           
+           var PersonalDetails = {
+               "name": $("#nm").val(),
+               "email": $("#eml").val(),
+               "phone": $("#phn").val(),
+               "status": $("#sts").val(),
+               "message": $("#msg").val(),
+               
+           };
+
+    
+
+
+           $.ajax({
+               type: "POST",
+               url: 'http://localhost:11608/api/Room/AddContact',
+               data: JSON.stringify(PersonalDetails),
+               contentType: "application/json;charset=utf-8",
+              //processData: true,
+               success: function (data, status, xhr) {
+                   alert("this result is :" + status);
+               },
+               error: function (xhr) {
+                   alert("Error"+xhr.responseText);
+               }
+           });
+       });
+    </script>
+
+
+
+</body >
+</html >

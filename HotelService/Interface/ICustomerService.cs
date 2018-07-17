@@ -9,5 +9,6 @@ namespace HotelService.Interface
 {
    public interface ICustomerService : IService<Customers>
     {
+        int UpdateStatus(Customers customer);
     }
 }

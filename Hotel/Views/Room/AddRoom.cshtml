@@ -1,0 +1,99 @@
+﻿@model HotelEntity.Class.Rooms
+
+@{
+    ViewBag.Title = "AddRoom";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<div class="panel panel-primary" style="margin-top:70px;">
+    <div class="panel-heading">Add New Room</div>
+
+   @using (Html.BeginForm("AddRoom", "Room", FormMethod.Post, new { enctype = "multipart/form-data" }))
+   {
+
+       if (Session["UserID"] != null)
+       {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <textarea class="form-control" rows="5" cols="3" name="Description"></textarea>
+  
+                          @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                    <div class="col-sm-4">
+                        <select class="form-control" id="inputPublicationStatus" name="Status">
+                            <option>---Select  Status---</option>
+                            <option value="1">Active</option>
+                            <option value="0">Deactive</option>
+                        </select>
+                    </div>
+
+                    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                    <div class="col-sm-4">
+                        <select class="form-control" id="inputPublicationStatus" name="Type">
+                            <option>---Select RoomType ---</option>
+                            <option value="Family Room">Family Room</option>
+                            <option value="Standard Room">Standard Room</option>
+                            <option value="Deluxe Room">Deluxe Room</option>
+                            <option value="Luxury Room">Luxury Room</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="ImageFile" required>
+                    </div>
+                </div>
+
+
+                <div class="form-group" style="margin-top:100px;">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add Room" class="btn btn-primary btn-sm btn-block login-button" />
+                    </div>
+                </div>
+
+            </div>}
+    }
+
+    </div>

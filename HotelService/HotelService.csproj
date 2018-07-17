@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\CustomerService.cs" />
+    <Compile Include="Class\RoomService.cs" />
     <Compile Include="Class\Service.cs" />
     <Compile Include="Class\UserService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
+    <Compile Include="Interface\IRoomsService.cs" />
     <Compile Include="Interface\IService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +59,9 @@
       <Project>{59976bdd-a136-4847-8a18-cfd747cdd665}</Project>
       <Name>HotelRepository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

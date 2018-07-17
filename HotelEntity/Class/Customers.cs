@@ -11,8 +11,7 @@ namespace HotelEntity.Class
    public class Customers:Entity
     {
         [Key]
-        public int Customer_Id { get; set; }
-
+        public int CustomerId { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "name is required ")]
         public string Customer_Name { get; set; }
 
@@ -23,9 +22,18 @@ namespace HotelEntity.Class
         public int Customer_PhoneNo { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Gender is required ")]
+
         public string Gender { get; set; }
 
-       
+        public int UserId { get; set; }
+
+        public int Status { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
+
+
+
 
 
 

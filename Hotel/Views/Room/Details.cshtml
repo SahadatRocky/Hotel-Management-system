@@ -1,0 +1,83 @@
+﻿@model HotelEntity.Class.Rooms
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<div class="panel panel-primary" style="margin-top:70px;">
+    <div class="panel-heading">Details OF  Room</div>
+
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+              RoomNumber:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RoomNumber)
+            </dd>
+            <hr />
+            <dt>
+                Description:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <hr />
+            <dt>
+                Amount:
+
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+            <hr />
+            <dt>
+                Capacity:
+
+            <dd>
+                @Html.DisplayFor(model => model.Capacity)
+            </dd>
+
+            <hr />
+            <dt>
+               <h5>Status:</h5>
+            </dt>
+
+            <dd>
+               @if (Model.Status == 1)
+               {
+                   <h6 style="color:red;">ACTIVE</h6>
+               }
+               else {
+                   <h6 style="color:red;">DE-ACTIVE</h6>
+               }
+            </dd>
+            <hr >
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <hr />
+            <dt>
+               Room Image :
+            </dt>
+          
+            <dd>
+                <img src="@Model.ImagePath" height="300" width="400" />
+
+            </dd>
+
+          
+
+        </dl>
+    </div>
+   
+
+</div>

@@ -17,5 +17,35 @@ namespace HotelService.Class
         {
             return repo.check_pass(us);
         }
+
+        public int DeleteUser(int id)
+        {
+            return this.repo.DeleteUser(id);
+        }
+
+        public int UpdateUserInformation(User rm)
+        {
+            return this.repo.UpdateUserInformation(rm);
+        }
+
+        public List<User> GetAllinformation()
+        {
+            return this.repo.GetAllinformation();
+        }
+
+        public int UpdateAllUsersBookingRoom(Rooms rm)
+        {
+            return this.repo.UpdateAllUsersBookingRoom(rm);
+        }
+
+        public int UpdateStatus(User user)
+        {
+            return this.repo.UpdateStatus(user);
+        }
+
+        public List<Rooms> GetAllinformationRooms()
+        {
+            return this.GetAllinformationRooms();
+        }
     }
 }

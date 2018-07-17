@@ -1,0 +1,91 @@
+﻿@model IEnumerable<HotelEntity.Class.Rooms>
+
+@{
+    ViewBag.Title = "ManageRoom";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<script src="~/Scripts/Admin/Search.js"></script>
+
+<h3 class="text-center text-primary">Search Room Number</h3>
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-fw fa-search "></i></span>
+    <input id="myInput" onkeyup="myFunction()" type="text" class="form-control" name="search" placeholder="Search any room number.............">
+</div>
+
+<br />
+
+<div class="panel panel-primary" style="margin-top:10px;">
+    <div class="panel-heading">ManageRoom</div>
+
+    <table class="table table-bordered table-hover table-striped" id="myTable">
+
+        <tr>
+            <th>
+               RoomNo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr >
+                <td width="30px;">
+                    @Html.DisplayFor(modelItem => item.RoomNumber)
+                </td>
+                <td width="200px;">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td width="30px;">
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td width="30px;">
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+
+                <td width="100px;">
+                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" height="150" width="100" />
+                </td>
+
+                @if (item.Status == 1)
+                {
+                    <td class="btn-success" style="height:10px;">
+                        ACTIVE
+                    </td>
+                }
+                else
+                {
+                    <td class="btn-danger">
+                        DEACTIVE
+                    </td>
+                }
+
+
+
+
+                <td>
+
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i> @Html.ActionLink("Edit", "Edit", new { id = item.RoomId }) |
+                    <i class="fa fa-list" aria-hidden="true"></i>@Html.ActionLink("Details", "Details", new { id = item.RoomId }) |
+                    <i class="fa fa-trash" aria-hidden="true"></i> @Html.ActionLink("Delete", "Delete", new { id = item.RoomId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

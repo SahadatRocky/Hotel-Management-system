@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HotelEntity.Class.Customers>
+
+@{
+    ViewBag.Title = "BillGenerate";
+    Layout = "~/Views/Shared/_AminPanelLayout.cshtml";
+}
+
+<div class="panel panel-primary" style="margin-top:70px;">
+    <div class="panel-heading">Billing Information</div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                Customer Name:
+            </th>
+            <th>
+                Address:
+            </th>
+            <th>
+                Phone No:
+            </th>
+            <th>
+                Gender:
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_PhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+
+
+                @if (item.Status == 1)
+                {
+                    <td>
+                        Paid
+                    </td>
+                }
+                else
+                {
+
+                    <td>Not Paid</td>
+                }
+
+            </tr>
+        }
+
+    </table>
+
+</div>

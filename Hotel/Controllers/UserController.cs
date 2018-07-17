@@ -13,11 +13,16 @@ namespace Hotel.Controllers
     {
 
         IUserService service;
-      //  ICustomerService sp;
+        IRoomsService room;
+        ICustomerService s;
+
+        //  ICustomerService sp;
         public UserController()
         {
             this.service = Injector.Container.Resolve<IUserService>();
-           // this.sp = Injector.Container.Resolve<ICustomerService>();
+            this.room = Injector.Container.Resolve<IRoomsService>();
+            this.s = Injector.Container.Resolve<ICustomerService>();
+            // this.sp = Injector.Container.Resolve<ICustomerService>();
         }
 
         // GET: User
@@ -93,7 +98,7 @@ namespace Hotel.Controllers
                     Session["UserID"] = usr.UserId.ToString();
                     Session["Username"] = usr.Username.ToString();
                     Session["Firstname"] = usr.FirstName.ToString();
-                    return RedirectToAction("index", "Admin");
+                    return RedirectToAction("AdminPage", "Admin");
                 }
                 else if (usr.UserType == "User")
                 {
@@ -133,11 +138,16 @@ namespace Hotel.Controllers
             return RedirectToAction("Index", "User");
         }
 
+        //reservation
         public ActionResult UserHomepage() {
 
             if (Session["UserId"] != null)
             {
-                return View();
+                
+                ViewBag.customerid =Session["UserID"];
+
+                return View(this.room.GetAllinformation());
+
             }
             else
             {
@@ -146,13 +156,89 @@ namespace Hotel.Controllers
 
         }
 
-       
+        [HttpPost, ActionName("UserHomepage")]
+        public ActionResult UserHomepages()
+        {
+            // User users = this.service.Get(id);
+            ViewBag.customerid = Session["UserID"];
+            ViewBag.searchdate = Convert.ToDateTime(Request.Form["Check"]);
+            return View(this.room.SearchGetAll(Convert.ToDateTime(Request.Form["Check"])));
+        }
+
+        [HttpGet]
+        public ActionResult ShowRoomDetails(int id, int cid)
+
+        {
+            ViewBag.customerid = Session["UserID"];
+            return View(this.room.Get(id));
+        }
+
+        [HttpPost]
+        public ActionResult ShowRoomDetails(Rooms rome, int id, int cid)
+        {
+            User user = this.service.Get(cid);
+            user.Status = 1;
+            this.service.UpdateStatus(user);
+
+            if (ModelState.IsValid)
+            {
+                this.service.UpdateAllUsersBookingRoom(rome);
+
+                return RedirectToAction("UserHomepages");
+            }
+            else
+            {
+                return View(rome);
+            }
+
+        }
 
 
-        
-        
+        [HttpGet]
+        public ActionResult UserDetails()
+        {
+            return View(this.service.GetAll().ToList());
+
+        }
+
+        [HttpGet]
+        public ActionResult DeleteUser(int id)
+        {
+            return View(this.service.Get(id));
+        }
 
 
+        [HttpPost, ActionName("DeleteUser")]
+        public ActionResult DeleteConfirmedUSer(int id)
+        {
+            
+            this.service.DeleteUser(id);
+            return RedirectToAction("UserDetails", "User");
+        }
+
+        [HttpGet]
+        public ActionResult EditUserDetails(int id)
+        {
+            return View(this.service.Get(id));
+
+        }
+
+
+        [HttpPost]
+        public ActionResult EditUserDetails(User Us)
+        {
+
+            if (ModelState.IsValid)
+            {
+                this.service.UpdateUserInformation(Us);
+                return RedirectToAction("UserDetails", "User");
+            }
+            else
+            {
+                return View(Us);
+            }
+
+        }
 
 
 

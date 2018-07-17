@@ -9,6 +9,10 @@ namespace HotelRepository.Interface
 {
    public interface ICustomerRepository: IRepository<Customers>
     {
+      
+
+        int UpdateStatus(Customers customer);
+
 
     }
 }

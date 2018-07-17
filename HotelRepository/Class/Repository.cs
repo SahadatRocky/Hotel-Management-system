@@ -37,6 +37,7 @@ namespace HotelRepository.Class
 
         public int Update(TEntity entity)
         {
+          //  DbSet.Attach();
             context.Entry<TEntity>(entity).State = EntityState.Modified;
             return context.SaveChanges();
         }

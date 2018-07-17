@@ -11,6 +11,7 @@ namespace HotelEntity.Class
     {
         [Key]
         public int UserId { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "First name is required ")]
         public string FirstName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Last name is required ")]
@@ -26,8 +27,15 @@ namespace HotelEntity.Class
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required ")]
         [Compare("Password", ErrorMessage = "Please Confirm your Password")]
+        [notmapped]
         public string ConfirmPassword { get; set; }
 
+        public string Address { get; set; }
+
+        public string ImagePath { get; set; }
         public string UserType { get; set; }
+
+        public int Status { get; set; }
+
     }
 }

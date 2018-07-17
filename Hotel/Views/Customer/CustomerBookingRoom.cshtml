@@ -1,0 +1,76 @@
+﻿@model IEnumerable<HotelEntity.Class.Rooms>
+
+@{
+    ViewBag.Title = "CustomerBookingRoom";
+    Layout = "~/Views/Shared/_UserPanelLayout.cshtml";
+}
+
+
+@if (Session["UserID"] != null)
+{<div id="HTMLtoPDF">
+        <div class="panel panel-primary" style="margin-top:30px;">
+            <div class="panel-heading"><img src="/Scripts/Frontend/images/hotel-icon-blue.jpg" width="50" height="50" /></div>
+
+            <p style="text-align:center;font_family:verdana;font-size:300%;color:greenyellow;">Hotel The Westin </p>
+            <h3 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Name: @ViewBag.CustomerName</h3>
+            <hr />
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNumber)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CheckIn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Checkout)
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CheckIn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Checkout)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+
+            <label style="margin-top:30px;">Total Amount:@Model.Sum(i => i.Amount)</label>
+        </div>
+
+    </div>
+    <center style="font-size:200%;font:30;color:aquamarine;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"> <a href="#" onclick="HTMLtoPDF()">Take PayMent Slip</a> </center>
+
+        <script src="~/Scripts/PDF/jquery-2.1.3.js"></script>
+        <script src="~/Scripts/PDF/jspdf.js"></script>
+        <script src="~/Scripts/PDF/pdfFromHTML.js"></script>
+
+
+}

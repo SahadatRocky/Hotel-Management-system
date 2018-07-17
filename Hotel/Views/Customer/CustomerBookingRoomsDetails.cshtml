@@ -1,0 +1,145 @@
+﻿@model IEnumerable<HotelEntity.Class.Rooms>
+
+@{
+    ViewBag.Title = "CustomerBookingRoomsDetails";
+    Layout = "~/Views/Shared/_UserPanelLayout.cshtml";
+}
+
+
+@if (Session["UserID"] != null)
+{
+    <link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script>
+
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  });
+
+
+  $(function () {
+      $("#datepicker1").datepicker();
+  });
+    </script>
+
+
+    <form action="" method="post" name="myForm" onsubmit = "return validateForm()">
+        <input type="hidden" name="Cs_id" value="@ViewBag.customerid" />
+
+
+        <div class="form-group" style="margin-top:50px;">
+            <h3 class="text-success" style="margin-bottom:20px;margin-left:10px;">***Search date When You want to book Room </h3>
+            <div class="col-md-4">
+                <input type="date" id="datepicker" class="form-control" name="Check" required>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-sm-3">
+                <input type="submit" class="btn btn-success btn-block" name="btn" value="Search">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-5">
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+        <div class="panel panel-primary" style="margin-top:20px;">
+            <div class="panel-heading">New Customer</div>
+
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Capacity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+
+                    <th>Action</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Capacity)
+                        </td>
+
+                        @if (item.Status == 0)
+                    {
+                            <td style="color:red;" class="danger">
+                                Booked
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="color:green;" class="success">
+                                Available
+                            </td>
+                        }
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+
+
+                        @if (item.Status == 1)
+                    {
+                            <td>
+                                @Html.ActionLink("ShowDetails", "ShowRoomDetails", new { id = item.RoomId, cid =@ViewBag.customerid }) |
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="danger"></td>
+                        }
+                    </tr>
+                }
+
+            </table>
+
+
+        </div>
+    </form>
+        <script>
+
+            function validateForm() {
+                var x = document.forms["myForm"]["Check"].value;
+                if (x == "") {
+                    alert("Name must be filled out");
+                    return false;
+                }
+            }
+
+        </script>
+        
+        }

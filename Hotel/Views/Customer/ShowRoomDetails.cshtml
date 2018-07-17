@@ -1,0 +1,132 @@
+﻿@model HotelEntity.Class.Rooms
+
+@{
+    ViewBag.Title = "ShowRoomDetails";
+    Layout = "~/Views/Shared/_UserPanelLayout.cshtml";
+}
+
+<link href="~/Scripts/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  });
+
+
+  $(function () {
+      $("#datepicker1").datepicker();
+  });
+</script>
+
+<div class="panel panel-primary" style="margin-top:50px;">
+    <div class="panel-heading">Room Details</div>
+
+    @using (Html.BeginForm())
+    {
+        if (Session["UserID"] != null)
+        {
+
+            @Html.AntiForgeryToken()
+            <form action="" method="post">
+    <br />
+                <br />
+                <div class="form-horizontal">
+ 
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.RoomId)
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="RoomNumber" class="form-control">
+                                <option value="@Html.DisplayFor(model => model.RoomId) ">
+                                    @Html.DisplayFor(model => model.RoomNumber)
+                                </option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="hidden" name="Status" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CheckIn, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="date" id="datepicker" class="form-control" name="CheckIn">
+                            @Html.ValidationMessageFor(model => model.CheckIn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Checkout, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="date" id="datepicker1" class="form-control" name="Checkout">
+
+                            @Html.ValidationMessageFor(model => model.Checkout, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2">Credit Card:</label>
+                        <div class="col-md-10">
+                            <input type="text" id="" class="form-control" name="Card">
+      </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="hidden" value="@ViewBag.c_id" name="C_Id" />
+                            @Html.ValidationMessageFor(model => model.C_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                
+
+                    <div class="form-group">
+                        <div class="form-actions no-color col-sm-offset-3">
+                            <input type="submit" value="BOOK" class="btn btn-primary" />
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>}
+    }
+
+</div>
